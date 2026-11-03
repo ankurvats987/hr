@@ -17,11 +17,23 @@ const seed = {
   timesheets: [{ id: 't1', week: 'Week of 02 Mar 2026', employee: 'Isha Verma', hours: 38.5, status: 'Approved', notes: 'Release preparation' }],
   candidates: [{ id: 'c1', name: 'Nisha Shah', job: 'Senior frontend engineer', stage: 'Applied', email: 'nisha.shah@example.test', source: 'Careers' }],
   jobs: [{ id: 'j1', title: 'Senior frontend engineer', department: 'Engineering', location: 'Bengaluru or Remote', status: 'Published' }],
-  onboarding: [{ id: 'o1', label: 'Sign your offer letter', done: false, required: true }, { id: 'o2', label: 'Upload identity document', done: false, required: true }, { id: 'o3', label: 'Meet your manager', done: true, required: false }],
-  tasks: [{ id: 'task1', label: 'Complete your profile', related: 'Isha Verma', done: false, due: '2026-03-20' }],
+  onboarding: [{ id: 'o1', label: 'Sign your offer letter', employeeId: 'e1', done: false, required: true }, { id: 'o2', label: 'Upload identity document', employeeId: 'e1', done: false, required: true }, { id: 'o3', label: 'Meet your manager', employeeId: 'e1', done: true, required: false }],
+  payroll: [{ id: 'p1', month: 'October 2026', status: 'Draft', employees: 4, gross: 420000, deductions: 42000, net: 378000 }],
+  tasks: [{ id: 'task1', label: 'Complete your profile', related: 'Isha Verma', employeeId: 'e1', done: false, due: '2026-03-20' }],
   notifications: [],
   audit: [],
 };
+
+function normalizeState(state) {
+  const next = state || structuredClone(seed);
+  const employeeIdFor = (record) => record.employeeId || (next.employees || []).find((employee) => employee.name === record.employee)?.id || 'e1';
+  next.leaveRequests = (next.leaveRequests || []).map((request) => ({ ...request, employeeId: employeeIdFor(request) }));
+  next.attendance = (next.attendance || []).map((entry) => ({ ...entry, employeeId: employeeIdFor(entry) }));
+  next.timesheets = (next.timesheets || []).map((entry) => ({ ...entry, employeeId: employeeIdFor(entry) }));
+  next.tasks = (next.tasks || []).map((task) => ({ ...task, employeeId: task.employeeId || (next.employees || []).find((employee) => employee.name === task.related)?.id || 'e1' }));
+  next.onboarding = (next.onboarding || []).map((task) => ({ ...task, employeeId: task.employeeId || 'e1' }));
+  return next;
+}
 
 function openDb() {
   return new Promise((resolve, reject) => {
@@ -35,10 +47,10 @@ function openDb() {
 
 async function readState() {
   const db = await openDb();
-  if (!db) return JSON.parse(localStorage.getItem('kestrel-hr-state') || 'null') || structuredClone(seed);
+  if (!db) return normalizeState(JSON.parse(localStorage.getItem('kestrel-hr-state') || 'null'));
   return new Promise((resolve, reject) => {
     const request = db.transaction(STORE).objectStore(STORE).get('app');
-    request.onsuccess = () => resolve(request.result || structuredClone(seed));
+    request.onsuccess = () => resolve(normalizeState(request.result));
     request.onerror = () => reject(request.error);
   });
 }

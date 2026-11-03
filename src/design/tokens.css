@@ -1,0 +1,25 @@
+:root {
+  --md-primary: #6750A4;
+  --md-primary-dark: #4F378B;
+  --md-primary-light: #EADDFF;
+  --md-on-primary: #FFFFFF;
+  --md-accent: #FF4081;
+  --md-on-accent: #FFFFFF;
+  --md-bg: #F9F7FC;
+  --md-surface: #FFFFFF;
+  --md-text-high: rgba(0, 0, 0, .87);
+  --md-text-medium: rgba(0, 0, 0, .60);
+  --md-text-disabled: rgba(0, 0, 0, .38);
+  --md-divider: rgba(0, 0, 0, .12);
+  --md-error: #D32F2F;
+  --md-success: #388E3C;
+  --md-warning: #F57C00;
+  --md-info: #1976D2;
+  --md-elev-1: 0 1px 3px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.14), 0 2px 1px -1px rgba(0,0,0,.12);
+  --md-elev-2: 0 1px 5px rgba(0,0,0,.2), 0 2px 2px rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.12);
+  --md-elev-4: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px rgba(0,0,0,.14), 0 1px 10px rgba(0,0,0,.12);
+  --md-elev-6: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px rgba(0,0,0,.14), 0 1px 18px rgba(0,0,0,.12);
+  --md-elev-8: 0 5px 5px -3px rgba(0,0,0,.2), 0 8px 10px 1px rgba(0,0,0,.14), 0 3px 14px 2px rgba(0,0,0,.12);
+  --md-elev-16: 0 8px 10px -5px rgba(0,0,0,.2), 0 16px 24px 2px rgba(0,0,0,.14), 0 6px 30px 5px rgba(0,0,0,.12);
+  --md-elev-24: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+}
