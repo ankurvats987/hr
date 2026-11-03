@@ -1,0 +1,6 @@
+schema: architecture/bindings/v1
+unit: home-and-tasks
+bindings:
+  - {source: src/App.jsx:191-205, framework: React, target: "feature screen consuming API hooks"}
+runtime_config:
+  - {name: current-user, must_appear_in_target: true, value: "session user id"}

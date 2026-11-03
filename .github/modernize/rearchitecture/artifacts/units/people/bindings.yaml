@@ -1,0 +1,6 @@
+schema: architecture/bindings/v1
+unit: people
+bindings:
+  - {source: src/App.jsx:213-225, framework: React, target: "people list/detail routes"}
+runtime_config:
+  - {name: permission, must_appear_in_target: true, value: employee.read/update}

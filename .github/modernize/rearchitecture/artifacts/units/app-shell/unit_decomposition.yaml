@@ -1,0 +1,6 @@
+schema: architecture/unit-decomposition/v1
+unit: app-shell
+commit: false
+candidate_splits:
+  - {name: routing, drivers: [boundary, framework], rationale: "URL handling should not be coupled to shell layout"}
+  - {name: session, drivers: [state], rationale: "session/auth state is shared by every feature"}

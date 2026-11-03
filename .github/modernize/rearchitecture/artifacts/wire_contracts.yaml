@@ -1,0 +1,28 @@
+schema: architecture/wire-contracts/v1
+contracts:
+  - name: local-resource-api
+    consumers: [app-shell, home-and-tasks, people, time-off-and-requests, attendance, timesheets, hiring-and-onboarding]
+    stability: frozen
+    source: "hr-app-build-spec-v2.md:421-474"
+    target_contract:
+      methods: ["list(resource, query)", "get(resource, id)", "create(resource, body)", "update(resource, id, patch, version)", "action(resource, id, name, payload)", "remove(resource, id)"]
+      errors: [validation, unauthenticated, forbidden, not_found, conflict, rule_violation, locked, quota, unsupported]
+      persistence: "IndexedDB adapter; UI cannot access storage directly"
+    semantic_divergence: "Spec names TypeScript/Dexie/TanStack Query; authorized implementation uses JavaScript/native IndexedDB and local React state while preserving method semantics."
+  - name: leave-approval
+    consumers: [time-off-and-requests, home-and-tasks]
+    stability: frozen
+    source: "src/App.jsx:268-277"
+    target_contract:
+      request: "{ employeeId, type, startDate, endDate, days, note }"
+      transitions: ["Pending -> Approved", "Pending -> Rejected"]
+      effects: ["audit entry", "notification", "balance/calendar update on approval"]
+    semantic_divergence: "Current prototype stores display date text; target stores canonical dates and derives display text."
+  - name: hiring-to-onboarding
+    consumers: [hiring-and-onboarding]
+    stability: frozen
+    source: "src/App.jsx:281-302"
+    target_contract:
+      transitions: ["Applied -> Interview 1 -> Offer -> Hired"]
+      hired_effects: ["employee or pending hire record", "onboarding task set"]
+      careers_application: "Persist candidate form data and generate a reference number; never create a fixed demo candidate."

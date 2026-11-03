@@ -1,0 +1,6 @@
+schema: architecture/unit-decomposition/v1
+unit: timesheets
+commit: false
+candidate_splits:
+  - {name: entry-form, drivers: [entry-point], rationale: "employee creation and submission"}
+  - {name: approvals, drivers: [boundary], rationale: "manager review and period lock rules"}

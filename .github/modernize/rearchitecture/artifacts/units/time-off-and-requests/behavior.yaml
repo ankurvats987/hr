@@ -1,0 +1,12 @@
+schema: architecture/behavior/v1
+unit: time-off-and-requests
+source_loc: src/App.jsx:206-211,268-277,457-467
+side_effects:
+  - {name: submit-leave, must_preserve: true, target: "leave request, audit, notification"}
+  - {name: decide-request, must_preserve: true, target: "status, audit, notification, balance/calendar derivation"}
+branches:
+  - {condition: approver-role, must_preserve: true, behavior: "approve/reject controls only for manager/admin"}
+  - {condition: request-status, must_preserve: true, behavior: "pending/approved/rejected presentation"}
+error_paths:
+  - {condition: invalid-date-or-balance, contract: "inline validation and refusal", must_preserve: true}
+concurrency: {model: "optimistic request version", tx_boundary: "decision plus effects"}

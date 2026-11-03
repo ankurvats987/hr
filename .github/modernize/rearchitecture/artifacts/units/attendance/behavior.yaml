@@ -1,0 +1,11 @@
+schema: architecture/behavior/v1
+unit: attendance
+source_loc: src/App.jsx:227-240
+side_effects:
+  - {name: check-in-out, must_preserve: true, target: "attendance entry and audit"}
+branches:
+  - {condition: open-entry, must_preserve: true, behavior: "show missing check-out state"}
+  - {condition: checked-in, must_preserve: true, behavior: "toggle check-out action"}
+error_paths:
+  - {condition: duplicate-open-entry, contract: "refuse or regularize instead", must_preserve: true}
+concurrency: {model: "one open attendance entry per employee", tx_boundary: "attendance mutation"}

@@ -1,0 +1,7 @@
+schema: architecture/bindings/v1
+unit: hiring-and-onboarding
+bindings:
+  - {source: src/App.jsx:281-302, framework: React, target: "recruitment pipeline and onboarding routes"}
+  - {source: src/App.jsx:472, framework: "public careers view", target: "local public route/form"}
+runtime_config:
+  - {name: pipeline-stages, must_appear_in_target: true, value: "Applied, Interview, Offer, Hired"}

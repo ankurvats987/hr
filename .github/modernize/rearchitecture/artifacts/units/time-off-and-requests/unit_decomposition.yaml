@@ -1,0 +1,7 @@
+schema: architecture/unit-decomposition/v1
+unit: time-off-and-requests
+commit: false
+candidate_splits:
+  - {name: leave-self-service, drivers: [entry-point], rationale: "request and balance views"}
+  - {name: approval-inbox, drivers: [boundary], rationale: "manager decision workflow"}
+  - {name: calendar, drivers: [data-flow], rationale: "approved leave is a calendar projection"}

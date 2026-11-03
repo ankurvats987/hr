@@ -1,0 +1,8 @@
+schema: architecture/bindings/v1
+unit: app-shell
+bindings:
+  - {source: src/main.jsx:1, framework: React/Vite, target: "mount root component"}
+  - {source: src/App.jsx:48-60, framework: "in-memory navigation", target: "route table with URL history"}
+runtime_config:
+  - {name: storage-mode, must_appear_in_target: true, value: indexeddb-local}
+  - {name: api-mode, must_appear_in_target: true, value: local}

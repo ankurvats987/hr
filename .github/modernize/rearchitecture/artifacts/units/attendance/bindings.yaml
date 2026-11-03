@@ -1,0 +1,6 @@
+schema: architecture/bindings/v1
+unit: attendance
+bindings:
+  - {source: src/App.jsx:227-240, framework: React, target: "attendance list and clock controls"}
+runtime_config:
+  - {name: attendance-policy, must_appear_in_target: true, value: "enabled/none and rounding"}

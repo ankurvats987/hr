@@ -1,0 +1,11 @@
+schema: architecture/behavior/v1
+unit: people
+source_loc: src/App.jsx:40-46,213-225
+side_effects:
+  - {name: add-employee, must_preserve: true, target: "employee store and audit"}
+  - {name: reset-demo-data, must_preserve: false, target: "development/sample action only"}
+branches:
+  - {condition: search-query, must_preserve: true, behavior: "filter directory by name, role, team, location"}
+error_paths:
+  - {condition: duplicate-employee, contract: "warn before create", must_preserve: true}
+concurrency: {model: "optimistic versioned records", tx_boundary: "employee plus job-history seed"}

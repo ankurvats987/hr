@@ -1,0 +1,2 @@
+2026-11-03T02:53:00Z — broadcast from coordinator
+Architecture decision: implement the authorized JavaScript/local-only target with a lightweight IndexedDB-backed API boundary; do not migrate to TypeScript, backend services, or complex state libraries. Initial runnable boundary is the complete functional core: app shell, home/tasks, people, time off/requests, attendance, timesheets, hiring/onboarding. Incomplete modules remain absent from navigation.

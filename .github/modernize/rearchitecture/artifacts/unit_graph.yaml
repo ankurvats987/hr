@@ -1,0 +1,44 @@
+schema: architecture/unit-graph/v1
+units:
+  - name: app-shell
+    source_anchors: [src/App.jsx:48-170, src/App.jsx:63-73]
+    exported_signature: "App({}) -> JSX"
+    dynamic_entrypoints: ["React root mount via src/main.jsx:1"]
+    depends_on: []
+    shared_refs: [shared-app-state, audit-writer]
+  - name: home-and-tasks
+    source_anchors: [src/App.jsx:191-205, src/App.jsx:279-279]
+    exported_signature: "Dashboard({data,current,persona,...}), Tasks({data,setData,setToast})"
+    dynamic_entrypoints: ["Home page selection", "My tasks navigation"]
+    depends_on: [app-shell, people, time-off, attendance]
+    shared_refs: [shared-app-state, audit-writer]
+  - name: people
+    source_anchors: [src/App.jsx:213-225]
+    exported_signature: "People({data,setData,setToast})"
+    dynamic_entrypoints: ["People navigation"]
+    depends_on: [app-shell]
+    shared_refs: [shared-app-state, audit-writer]
+  - name: time-off-and-requests
+    source_anchors: [src/App.jsx:206-211, src/App.jsx:268-277, src/App.jsx:457-467]
+    exported_signature: "TimeOff({data,setShowRequest}), Requests({data,persona,setData,setToast}), LeaveDialog"
+    dynamic_entrypoints: ["Time off navigation", "Requests navigation", "Home quick action"]
+    depends_on: [app-shell, people]
+    shared_refs: [shared-app-state, audit-writer, notification-writer]
+  - name: attendance
+    source_anchors: [src/App.jsx:227-240]
+    exported_signature: "Attendance({data,setData,setToast})"
+    dynamic_entrypoints: ["Attendance navigation"]
+    depends_on: [app-shell, people]
+    shared_refs: [shared-app-state, audit-writer]
+  - name: timesheets
+    source_anchors: [src/App.jsx:242-266]
+    exported_signature: "Timesheets({data,setData,setToast,persona})"
+    dynamic_entrypoints: ["Timesheets navigation"]
+    depends_on: [app-shell, people]
+    shared_refs: [shared-app-state, audit-writer]
+  - name: hiring-and-onboarding
+    source_anchors: [src/App.jsx:281-302, src/App.jsx:472-472]
+    exported_signature: "Hiring({data,setData,setToast,go}), Onboarding({data,setData,setToast}), Careers({onBack,onApply})"
+    dynamic_entrypoints: ["Hiring navigation", "Onboarding navigation", "Careers action"]
+    depends_on: [app-shell, people]
+    shared_refs: [shared-app-state, audit-writer]

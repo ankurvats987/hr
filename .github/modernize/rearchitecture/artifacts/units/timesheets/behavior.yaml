@@ -1,0 +1,12 @@
+schema: architecture/behavior/v1
+unit: timesheets
+source_loc: src/App.jsx:242-266
+side_effects:
+  - {name: submit-entry, must_preserve: true, target: "timesheet record and audit"}
+  - {name: approve-entry, must_preserve: true, target: "approved status and audit"}
+branches:
+  - {condition: submitted-and-approver, must_preserve: true, behavior: "render approval action"}
+  - {condition: approved, must_preserve: true, behavior: "read-only approved state"}
+error_paths:
+  - {condition: locked-period, contract: "locked refusal with explanation", must_preserve: true}
+concurrency: {model: "optimistic versioned records", tx_boundary: "entry status mutation"}

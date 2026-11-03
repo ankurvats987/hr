@@ -1,0 +1,11 @@
+schema: architecture/behavior/v1
+unit: app-shell
+source_loc: src/App.jsx:75-170
+side_effects:
+  - {name: persist-session-and-data, must_preserve: true, target: "API adapter/session store"}
+branches:
+  - {condition: persona, must_preserve: true, behavior: "role-sensitive navigation and current user"}
+  - {condition: welcome-not-dismissed, must_preserve: true, behavior: "welcome/tour only on first run"}
+error_paths:
+  - {condition: storage-read-fails, contract: "recover to usable empty/sample state", must_preserve: true}
+concurrency: {model: "single browser tab plus BroadcastChannel invalidation", tx_boundary: "one API mutation and audit entry"}

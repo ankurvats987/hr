@@ -1,0 +1,6 @@
+schema: architecture/unit-decomposition/v1
+unit: home-and-tasks
+commit: false
+candidate_splits:
+  - {name: dashboard-widgets, drivers: [cohesion], rationale: "each widget should query its source resource"}
+  - {name: tasks, drivers: [boundary], rationale: "task mutations are independent from read-only summary cards"}

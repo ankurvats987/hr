@@ -1,0 +1,48 @@
+project:
+  scope_path: "."
+  loc: 480
+  languages: [javascript]
+  git: true
+  structure:
+    src: "Application source"
+    public: "Static assets"
+  notes: "Small Vite React HR prototype with one-file JSX and localStorage persistence."
+
+assessment:
+  change_type: rewrite
+  rationale: |
+    The request replaces a one-file JSX/localStorage prototype with a TypeScript/Vite local-first architecture and multiple functional HR modules.
+  transformations:
+    - fromStack: "React JSX/Vite"
+      fromStackVersion: "detected from package metadata by workers"
+      toStack: "React TypeScript/Vite"
+      toStackVersion: "as specified by user"
+    - fromStack: "localStorage"
+      fromStackVersion: "current prototype"
+      toStack: "IndexedDB-backed service/API layer"
+      toStackVersion: "as specified by user"
+  grouping_needed: false
+  deep_planning: undecided
+
+progress_sync:
+  run_id: d2ca3bf7-b79e-4b87-899e-35edd4868a58
+  grouping_mode: none
+  execution_mode: all-at-once
+  plan_start_time: 2026-11-03T02:36:45.8341225Z
+  plan_completed_time:
+  execution_start_time: 2026-11-03T02:50:00Z
+  execution_completed_time:
+  validation_start_time:
+  validation_completed_time:
+  total_phases: 7
+  completed_phases: 0
+  total_modules: 1
+  completed_modules: 0
+  total_tasks: 10
+  completed_tasks: 10
+  completed_phases: 7
+  execution_completed_time: 2026-11-03T03:14:00Z
+  validation_completed_time: 2026-11-03T03:14:00Z
+  total_commits: 0
+  build_verified: true
+  test_verified: true

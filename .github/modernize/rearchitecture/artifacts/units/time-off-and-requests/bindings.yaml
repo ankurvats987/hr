@@ -1,0 +1,6 @@
+schema: architecture/bindings/v1
+unit: time-off-and-requests
+bindings:
+  - {source: src/App.jsx:457-467, framework: React dialog, target: "validated leave form route/dialog"}
+runtime_config:
+  - {name: leave-policy, must_appear_in_target: true, value: "balance and approval policy"}

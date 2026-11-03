@@ -1,0 +1,7 @@
+schema: architecture/unit-decomposition/v1
+unit: hiring-and-onboarding
+commit: false
+candidate_splits:
+  - {name: careers-application, drivers: [entry-point], rationale: "candidate-facing form has a separate route and data contract"}
+  - {name: recruiting-pipeline, drivers: [boundary], rationale: "internal stage/interview/offer workflow"}
+  - {name: onboarding, drivers: [data-flow], rationale: "hired candidate creates employee tasks"}

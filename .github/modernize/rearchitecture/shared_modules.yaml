@@ -1,0 +1,33 @@
+schema: architecture/shared-modules/v1
+modules:
+  - source_loc: src/App.jsx:4-38
+    name: shared-app-state
+    kind: "god-state registry"
+    used_by_units: [app-shell, home-and-tasks, people, time-off-and-requests, attendance, timesheets, hiring-and-onboarding]
+    fields:
+      - {name: persona, type: string}
+      - {name: employees, type: array}
+      - {name: leaveRequests, type: array}
+      - {name: attendance, type: array}
+      - {name: timesheets, type: array}
+      - {name: jobs, type: array}
+      - {name: applicantsList, type: array}
+      - {name: onboarding, type: array}
+      - {name: notifications, type: array}
+      - {name: audit, type: array}
+    split_candidate: "resource repositories plus session state"
+    migration_strategy: "central API adapter; feature hooks consume resource-specific methods"
+  - source_loc: src/App.jsx:145-155
+    name: audit-writer
+    kind: "cross-cutting side effect"
+    used_by_units: [app-shell, home-and-tasks, people, time-off-and-requests, attendance, timesheets, hiring-and-onboarding]
+    fields: [{name: audit, type: array}]
+    split_candidate: "audit service"
+    migration_strategy: "API adapter appends one audit record per successful write"
+  - source_loc: src/App.jsx:268-277
+    name: notification-writer
+    kind: "cross-cutting side effect"
+    used_by_units: [time-off-and-requests]
+    fields: [{name: notifications, type: array}]
+    split_candidate: "notification service"
+    migration_strategy: "resource action emits notification event consumed by notification store"

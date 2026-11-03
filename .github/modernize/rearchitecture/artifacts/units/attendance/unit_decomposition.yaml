@@ -1,0 +1,6 @@
+schema: architecture/unit-decomposition/v1
+unit: attendance
+commit: false
+candidate_splits:
+  - {name: employee-clock, drivers: [entry-point], rationale: "self-service clock controls"}
+  - {name: attendance-list, drivers: [scope], rationale: "manager/HR review and regularization"}

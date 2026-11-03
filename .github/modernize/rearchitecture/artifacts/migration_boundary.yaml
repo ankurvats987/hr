@@ -1,0 +1,21 @@
+schema: architecture/migration-boundary/v1
+user_intent:
+  strategy: incremental_local_rewrite
+  cleanup_required: true
+  evidence: "clarification.md Generic Success definition and Out of scope"
+must_rewrite:
+  - src/App.jsx
+  - src/App.css
+  - src/index.css
+  - src/main.jsx
+  - package.json
+  - package-lock.json
+  - "new src/api, src/features, src/engines, src/ui modules"
+  rationale: "The current monolith and localStorage persistence prevent functional module contracts."
+copy_as_is:
+  - "Material-inspired color and spacing tokens after removing remote font imports"
+  - "Sample people names and Kestrel Works copy where still accurate"
+legacy_allowed_to_remain: []
+defer_cleanup:
+  - "Undocumented modules (payroll, expenses, documents, performance, offboarding, learning, engagement, help desk, assets, reports, automations) until complete end-to-end workflows exist"
+smallest_runnable_boundary: "workspace shell + local persistence + people + leave/requests + attendance + timesheets + hiring/onboarding"

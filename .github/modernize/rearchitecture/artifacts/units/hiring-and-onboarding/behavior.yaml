@@ -1,0 +1,12 @@
+schema: architecture/behavior/v1
+unit: hiring-and-onboarding
+source_loc: src/App.jsx:281-302,472
+side_effects:
+  - {name: apply, must_preserve: true, target: "candidate record and reference number"}
+  - {name: hire, must_preserve: true, target: "employee/pending hire and onboarding tasks"}
+branches:
+  - {condition: stage-advance, must_preserve: true, behavior: "ordered pipeline transition"}
+  - {condition: already-at-final-stage, must_preserve: true, behavior: "no further transition"}
+error_paths:
+  - {condition: invalid-application, contract: "field validation", must_preserve: true}
+concurrency: {model: "optimistic candidate version", tx_boundary: "hire transition plus onboarding seed"}

@@ -1,0 +1,7 @@
+schema: architecture/unit-decomposition/v1
+unit: people
+commit: false
+candidate_splits:
+  - {name: directory, drivers: [entry-point], rationale: "list/search/filter behavior"}
+  - {name: employee-detail, drivers: [boundary], rationale: "record mutations and related data"}
+  - {name: org-chart, drivers: [presentation], rationale: "tree visualization has distinct traversal needs"}

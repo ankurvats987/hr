@@ -1,0 +1,6 @@
+schema: architecture/bindings/v1
+unit: timesheets
+bindings:
+  - {source: src/App.jsx:242-266, framework: React form, target: "timesheet resource form and approval action"}
+runtime_config:
+  - {name: period-lock, must_appear_in_target: true, value: "timesheet period settings"}

@@ -1,0 +1,10 @@
+schema: architecture/behavior/v1
+unit: home-and-tasks
+source_loc: src/App.jsx:191-205,279
+side_effects:
+  - {name: complete-task, must_preserve: true, target: "task update plus audit"}
+branches:
+  - {condition: persona-is-manager-or-admin, must_preserve: true, behavior: "show approvals/team summary"}
+  - {condition: task-done, must_preserve: true, behavior: "toggle completion and status styling"}
+error_paths: []
+concurrency: {model: "query-derived widgets", tx_boundary: "task mutation"}

@@ -1,0 +1,21 @@
+schema: architecture/cross-unit-state/v1
+flows:
+  - name: leave-request-to-approval
+    source: "src/App.jsx:268-277"
+    writers: [time-off-and-requests]
+    readers: [home-and-tasks, time-off-and-requests]
+    pairing: matched
+    must_preserve: "approval changes status, writes audit and notification"
+  - name: employee-to-time-records
+    source: "src/App.jsx:40-46 and initialState"
+    writers: [people]
+    readers: [attendance, timesheets, home-and-tasks]
+    pairing: matched
+    must_preserve: "records refer to employee identity, not copied display-only rows"
+  - name: candidate-hired-to-onboarding
+    source: "src/App.jsx:281-302"
+    writers: [hiring-and-onboarding]
+    readers: [home-and-tasks, hiring-and-onboarding]
+    pairing: unpaired
+    must_confirm: runtime
+    must_preserve: "Hired transition creates actionable onboarding state"
