@@ -13,8 +13,6 @@
 - **Payroll** — HR admins can create payroll runs, review totals, lock a run, and export CSV.
 - **Role-based views** — Employee, manager, and HR admin personas see different navigation items and actions.
 - **Local persistence** — Data is saved in the browser using IndexedDB, with localStorage fallback.
-- **Setup and demo data** — The app starts with a sample Kestrel Works workspace and editable records.
-- **Material-inspired UI** — Responsive layout, dialogs, forms, tables, status indicators, and mobile navigation.
 
 ## How it works
 
